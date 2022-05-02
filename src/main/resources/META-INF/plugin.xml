@@ -1,0 +1,39 @@
+<idea-plugin>
+
+  <name>PMDPlugin</name>
+
+  <vendor>Software eng 2</vendor>
+
+  <project-components>
+    <component>
+      <implementation-class>com.intellij.plugins.bodhi.pmd.PMDProjectComponent</implementation-class>
+    </component>
+  </project-components>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <actions>
+    <!-- The Main menu item which includes predefined and custom rulesets -->
+    <group id="PMDMenuGroup" text="Dead Code Detector Plugin" popup="true"
+           class="com.intellij.plugins.bodhi.pmd.actions.PMDMenuGroup">
+      <add-to-group group-id="ToolsMenu" anchor="first"/>
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+      <add-to-group group-id="ChangesViewPopupMenu" anchor="last"/>
+      <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+
+      <action class="com.intellij.plugins.bodhi.pmd.actions.PreDefinedMenuGroup" id="PMDPredefined"
+              popup="true" text="Run DCD"/>
+      <action id="PMDCustom" class="com.intellij.plugins.bodhi.pmd.actions.PMDCustom"
+              popup="true" text="Custom Rules"/>
+    </group>
+
+    <!-- The group representing toolbar items in settings -->
+    <group id="PMDSettingsEdit" text="Custom Rule"/>
+
+  </actions>
+  <extensions defaultExtensionNs="com.intellij">
+    <projectConfigurable id="PMD" displayName="PMD" instance="com.intellij.plugins.bodhi.pmd.PMDConfigurable"/>
+    <checkinHandlerFactory id="PMDCheckinHandlerFactory"
+                           implementation="com.intellij.plugins.bodhi.pmd.handlers.PMDCheckinHandlerFactory"/>
+  </extensions>
+</idea-plugin>
